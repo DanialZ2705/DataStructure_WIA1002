@@ -1,0 +1,91 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package lab7q1;
+
+/**
+ *
+ * @author mhmdd
+ */
+
+class MyQueue<T>{
+    private int head;
+    private int tail;
+    private int maxsize;
+    private T arr[];
+    
+    public MyQueue(int size){
+        head = 0;
+        tail = 0;
+        this.maxsize = size;
+        arr = (T[]) new String[maxsize]; 
+    }
+    
+    public boolean isEmpty(){
+        return tail == 0;
+    }
+    
+    public boolean isFull(){
+        return tail >= maxsize;
+    }
+    
+    public void enqueue(T value){
+        if(!isFull()){
+            arr[tail] = value;
+            tail++;
+            System.out.println("Enqueue: " + value);
+        }else{
+            System.out.println("Queue is full.");
+        }
+    }
+    
+    public void dequeue(){
+        System.out.println("-----------------");
+        if(!isEmpty()){
+            // remove the data first
+            T temp = arr[head];
+            System.out.println("Previous size: " + tail);
+            System.out.println("Removed: " + temp);
+            arr[head] = null;
+            System.out.println("Dequeue: " + arr[head]);
+            for(int i = 0; i < tail; i++){
+            //shift elements forward by 1 index
+                arr[i] = arr[i + 1];
+        }
+            System.out.println("New head: " + arr[head]);
+            tail--;
+            System.out.println("New size: " + tail);
+        }else System.out.println("Queue is empty");
+    }
+    
+    public void peek(){
+        System.out.println("Head of queue: " + arr[head]);
+    }
+    
+    public void display(){
+        System.out.println("-----------------------------------------------");
+        if(!isEmpty()){
+            System.out.println("There are " + tail + " items in the queue. Displaying: ");
+            for(int i = 0; i <= tail - 1; i++){
+                System.out.println("Data at index " + i + ": " + arr[i]);
+            }
+        }
+    }
+}
+
+
+
+public class Main {
+
+    public static void main(String[] args) {
+        MyQueue<String> myQ = new MyQueue<String>(10);
+        myQ.enqueue("Ninja");
+        myQ.enqueue("HuoHuo");
+        myQ.enqueue("Ayam");
+        myQ.display();
+        myQ.dequeue();
+        myQ.dequeue();
+    }
+    
+}
